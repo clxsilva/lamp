@@ -97,6 +97,16 @@ botao.addEventListener('touchend', (event) => {
     }
 })
 
+// Event listeners para os botões
+document.getElementById("ligarButton").addEventListener("click", async () => {
+    if (!track) {
+        await inicializarLanterna(); // Inicializa a lanterna ao clicar no botão
+    }
+    ligar(); // Ligar a lanterna
+});
+
+document.getElementById("desligarButton").addEventListener("click", desligar); // Desliga a lanterna
+
 // lanterna (torch)
 async function inicializarLanterna() {
     // try-catch (tratamento de exceções)
@@ -113,8 +123,9 @@ async function inicializarLanterna() {
         const capabilities = track.getCapabilities()
         if (!capabilities.torch) {
             console.log("Lanterna não suportada no dispositivo.")
-            return
+            return;
         }
+        console.log("lanterna pronta")
     } catch (error) {
         console.error(`Erro ao inicializar a lanterna: ${error}`)
     }
